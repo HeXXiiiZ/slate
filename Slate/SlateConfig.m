@@ -36,6 +36,9 @@
 #import "JSController.h"
 #import "Operation.h"
 #import "JSScreenWrapper.h"
+#import "LeapConstants.h"
+#import "LeapBinding.h"
+#import "SlateConfig+Leap.h"
 
 @implementation SlateConfig
 
@@ -372,6 +375,22 @@ static SlateConfig *_instance = nil;
           }
         }
       }
+    } else if ([tokens count] >= 3 && [[tokens objectAtIndex:0] isEqualToString:LEAP]) {
+        // leap <gesture> <op> <parameters>
+        @try {
+            SlateLogger(@"  LoadingL: %@",line);
+            LeapBinding *bind = [[LeapBinding alloc] initWithString:line];
+            [self addLeapBinding:bind];
+        } @catch (NSException *ex) {
+            SlateLogger(@"   ERROR %@",[ex name]);
+            NSAlert *alert = [SlateConfig warningAlertWithKeyEquivalents: [NSArray arrayWithObjects:@"Quit", @"Skip", nil]];
+            [alert setMessageText:[ex name]];
+            [alert setInformativeText:[ex reason]];
+            if ([alert runModal] == NSAlertFirstButtonReturn) {
+                SlateLogger(@"User selected exit");
+                [NSApp terminate:nil];
+            }
+        }
     }
     line = [e nextObject];
   }

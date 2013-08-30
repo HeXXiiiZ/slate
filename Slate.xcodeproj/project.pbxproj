@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		062E544B17CE8425000D8A86 /* libLeap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 062E544A17CE8425000D8A86 /* libLeap.dylib */; };
+		062E545417CE8576000D8A86 /* LeapObjectiveC.mm in Sources */ = {isa = PBXBuildFile; fileRef = 062E545117CE8576000D8A86 /* LeapObjectiveC.mm */; };
+		062E545517CE8576000D8A86 /* LeapObjectiveC.mm in Sources */ = {isa = PBXBuildFile; fileRef = 062E545117CE8576000D8A86 /* LeapObjectiveC.mm */; };
+		0669F12417CE9A03006BDD19 /* libLeap.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 062E544A17CE8425000D8A86 /* libLeap.dylib */; };
 		3AA7D09116A6ED1200C81A67 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA7D09016A6ED1200C81A67 /* WebKit.framework */; };
 		3AA7D09516A6EE0200C81A67 /* JSController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7D09416A6EE0200C81A67 /* JSController.m */; };
 		3AA7D09D16A6FC9B00C81A67 /* initialize.js in Resources */ = {isa = PBXBuildFile; fileRef = 3AA7D09A16A6FAE100C81A67 /* initialize.js */; };
@@ -99,6 +103,12 @@
 		5EB99A0216A7526400760915 /* ASCIIToCode_Azerty.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5EB99A0116A7526400760915 /* ASCIIToCode_Azerty.plist */; };
 		7F44A9AA16621A9D00222908 /* ASCIIToCode_Colemak.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F44A9A916621A9D00222908 /* ASCIIToCode_Colemak.plist */; };
 		B3D087D0160577FB008A7FC6 /* status.pdf in Resources */ = {isa = PBXBuildFile; fileRef = B3D087CF160577FB008A7FC6 /* status.pdf */; };
+		D474A03CB561DD9D7A9C314B /* LeapHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D474A48A59FF86F4D7D15B8A /* LeapHandler.m */; };
+		D474A7185238223F2D97756F /* SlateConfig+Leap.m in Sources */ = {isa = PBXBuildFile; fileRef = D474A9B6EE41072894601108 /* SlateConfig+Leap.m */; };
+		D474A8CD0132948B51BC805F /* LeapBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = D474A06A5070A31387516C20 /* LeapBinding.m */; };
+		D474AC2B33FC23F124C72F19 /* Performance.m in Sources */ = {isa = PBXBuildFile; fileRef = D474ADB796DB1B038C6DCF5B /* Performance.m */; };
+		D474ADD03C89B623C1C1249E /* Grid3x3.m in Sources */ = {isa = PBXBuildFile; fileRef = D474AC6FF2CEA8DA7D03C1A0 /* Grid3x3.m */; };
+		D474AE3CA3B3DAB0BAD6E3CE /* LeapConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = D474A9806DBD79A0E53BC33B /* LeapConstants.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +122,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		0669F12317CE99F6006BDD19 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				0669F12417CE9A03006BDD19 /* libLeap.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3B4D0C3615A3691900B39242 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -125,6 +145,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		062E544A17CE8425000D8A86 /* libLeap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libLeap.dylib; sourceTree = "<group>"; };
+		062E544D17CE8576000D8A86 /* Leap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Leap.h; sourceTree = "<group>"; };
+		062E544F17CE8576000D8A86 /* LeapMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeapMath.h; sourceTree = "<group>"; };
+		062E545017CE8576000D8A86 /* LeapObjectiveC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeapObjectiveC.h; sourceTree = "<group>"; };
+		062E545117CE8576000D8A86 /* LeapObjectiveC.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LeapObjectiveC.mm; sourceTree = "<group>"; };
 		3AA7D09016A6ED1200C81A67 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		3AA7D09316A6EE0200C81A67 /* JSController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSController.h; sourceTree = "<group>"; };
 		3AA7D09416A6EE0200C81A67 /* JSController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSController.m; sourceTree = "<group>"; };
@@ -293,6 +318,18 @@
 		5EB99A0116A7526400760915 /* ASCIIToCode_Azerty.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ASCIIToCode_Azerty.plist; sourceTree = "<group>"; };
 		7F44A9A916621A9D00222908 /* ASCIIToCode_Colemak.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ASCIIToCode_Colemak.plist; sourceTree = "<group>"; };
 		B3D087CF160577FB008A7FC6 /* status.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = status.pdf; path = Slate/status.pdf; sourceTree = "<group>"; };
+		D474A06A5070A31387516C20 /* LeapBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeapBinding.m; sourceTree = "<group>"; };
+		D474A3145D9C5CFB031F7D2F /* LeapBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeapBinding.h; sourceTree = "<group>"; };
+		D474A3790B204C92EDF4A09B /* LeapHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeapHandler.h; sourceTree = "<group>"; };
+		D474A48A59FF86F4D7D15B8A /* LeapHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeapHandler.m; sourceTree = "<group>"; };
+		D474A6132E579B776003419F /* SlateConfig+Leap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SlateConfig+Leap.h"; sourceTree = "<group>"; };
+		D474A90391AA0DB1B7958851 /* Grid3x3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grid3x3.h; sourceTree = "<group>"; };
+		D474A9806DBD79A0E53BC33B /* LeapConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeapConstants.m; sourceTree = "<group>"; };
+		D474A9B6EE41072894601108 /* SlateConfig+Leap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SlateConfig+Leap.m"; sourceTree = "<group>"; };
+		D474AA1F1C4E86F8CB36B236 /* LeapConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeapConstants.h; sourceTree = "<group>"; };
+		D474AC6FF2CEA8DA7D03C1A0 /* Grid3x3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Grid3x3.m; sourceTree = "<group>"; };
+		D474ADB796DB1B038C6DCF5B /* Performance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Performance.m; sourceTree = "<group>"; };
+		D474ADF5289D58D3B2A7938B /* Performance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Performance.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -304,6 +341,7 @@
 				47C4A2941384E8890066B6DE /* Cocoa.framework in Frameworks */,
 				3BA85C9A16276DAB00FAAF0B /* Sparkle.framework in Frameworks */,
 				3AA7D09116A6ED1200C81A67 /* WebKit.framework in Frameworks */,
+				062E544B17CE8425000D8A86 /* libLeap.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,6 +356,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		062E544C17CE84B7000D8A86 /* SDK */ = {
+			isa = PBXGroup;
+			children = (
+				062E544D17CE8576000D8A86 /* Leap.h */,
+				062E544F17CE8576000D8A86 /* LeapMath.h */,
+				062E545017CE8576000D8A86 /* LeapObjectiveC.h */,
+				062E545117CE8576000D8A86 /* LeapObjectiveC.mm */,
+			);
+			name = SDK;
+			sourceTree = "<group>";
+		};
 		3B4D0C3815A3721E00B39242 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -554,6 +603,7 @@
 		47C4A2921384E8890066B6DE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				062E544A17CE8425000D8A86 /* libLeap.dylib */,
 				3BA85C9916276DAB00FAAF0B /* Sparkle.framework */,
 				47C4A2C71384E8B10066B6DE /* Carbon.framework */,
 				47C4A2931384E8890066B6DE /* Cocoa.framework */,
@@ -591,6 +641,7 @@
 				47C4A2A61384E8890066B6DE /* SlateAppDelegate.m */,
 				3B3335AB14FC1EA900F72638 /* WindowInfoView.h */,
 				3B3335AC14FC1EA900F72638 /* WindowInfoView.m */,
+				D474A15E02CE9196DEFAF99E /* Leap */,
 			);
 			path = Slate;
 			sourceTree = "<group>";
@@ -629,6 +680,26 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		D474A15E02CE9196DEFAF99E /* Leap */ = {
+			isa = PBXGroup;
+			children = (
+				062E544C17CE84B7000D8A86 /* SDK */,
+				D474A9806DBD79A0E53BC33B /* LeapConstants.m */,
+				D474AA1F1C4E86F8CB36B236 /* LeapConstants.h */,
+				D474A06A5070A31387516C20 /* LeapBinding.m */,
+				D474A3145D9C5CFB031F7D2F /* LeapBinding.h */,
+				D474A48A59FF86F4D7D15B8A /* LeapHandler.m */,
+				D474A3790B204C92EDF4A09B /* LeapHandler.h */,
+				D474A9B6EE41072894601108 /* SlateConfig+Leap.m */,
+				D474A6132E579B776003419F /* SlateConfig+Leap.h */,
+				D474ADB796DB1B038C6DCF5B /* Performance.m */,
+				D474ADF5289D58D3B2A7938B /* Performance.h */,
+				D474AC6FF2CEA8DA7D03C1A0 /* Grid3x3.m */,
+				D474A90391AA0DB1B7958851 /* Grid3x3.h */,
+			);
+			name = Leap;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -640,6 +711,7 @@
 				47C4A28C1384E8890066B6DE /* Frameworks */,
 				47C4A28D1384E8890066B6DE /* Resources */,
 				3B4D0C3615A3691900B39242 /* CopyFiles */,
+				0669F12317CE99F6006BDD19 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -675,7 +747,7 @@
 		47C4A2861384E8890066B6DE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0460;
 			};
 			buildConfigurationList = 47C4A2891384E8890066B6DE /* Build configuration list for PBXProject "Slate" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -812,6 +884,13 @@
 				3BE0736B16AF735A00D33DB0 /* JSWrapperUtils.m in Sources */,
 				3BE0736E16AFB5CA00D33DB0 /* JSOperation.m in Sources */,
 				3B1E86EE16B3627A001B9090 /* JSOperationWrapper.m in Sources */,
+				D474AE3CA3B3DAB0BAD6E3CE /* LeapConstants.m in Sources */,
+				D474A8CD0132948B51BC805F /* LeapBinding.m in Sources */,
+				062E545417CE8576000D8A86 /* LeapObjectiveC.mm in Sources */,
+				D474A03CB561DD9D7A9C314B /* LeapHandler.m in Sources */,
+				D474A7185238223F2D97756F /* SlateConfig+Leap.m in Sources */,
+				D474AC2B33FC23F124C72F19 /* Performance.m in Sources */,
+				D474ADD03C89B623C1C1249E /* Grid3x3.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -826,6 +905,7 @@
 				3BA1BA62162DDFEF0026774E /* TestExpressionPoint.m in Sources */,
 				3BA1BA65162E01A30026774E /* TestStringTokenizer.m in Sources */,
 				3BA1BA6E162F51760026774E /* TestShellUtils.m in Sources */,
+				062E545517CE8576000D8A86 /* LeapObjectiveC.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -878,17 +958,19 @@
 		47C4A2BF1384E8890066B6DE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				ONLY_ACTIVE_ARCH = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -896,13 +978,17 @@
 		47C4A2C01384E8890066B6DE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -911,24 +997,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				DEPLOYMENT_LOCATION = YES;
-				DSTROOT = "tmp/$(PROJECT_NAME).dst";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Slate/Slate-Prefix.pch";
 				INFOPLIST_FILE = "Slate/Slate-Info.plist";
-				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -938,24 +1021,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEPLOYMENT_LOCATION = YES;
-				DSTROOT = "tmp/$(PROJECT_NAME).dst";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Slate/Slate-Prefix.pch";
 				INFOPLIST_FILE = "Slate/Slate-Info.plist";
-				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

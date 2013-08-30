@@ -32,6 +32,7 @@
 #import "SwitchOperation.h"
 #import "RunningApplications.h"
 #import "GridOperation.h"
+#import "LeapHandler.h"
 #import <Sparkle/SUUpdater.h>
 
 @implementation SlateAppDelegate
@@ -532,6 +533,9 @@ OSStatus OnModifiersChangedEvent(EventHandlerCallRef nextHandler, EventRef theEv
 
   // Register Hot Keys
   [self registerHotKeys];
+
+  // Register Leapmotion gestures
+  [[[LeapHandler alloc] init] setup];
 
   [self createSnapshotOperations];
 

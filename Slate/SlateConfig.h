@@ -28,6 +28,7 @@
   NSMutableDictionary *configs;
   NSMutableDictionary *configDefaults;
   NSMutableArray *bindings;
+  NSMutableArray *leapBindings;
   NSMutableDictionary *modalBindings;
   NSMutableDictionary *layouts;
   NSMutableArray *defaultLayouts;
@@ -44,6 +45,7 @@
 @property NSMutableArray *defaultLayouts;
 @property NSMutableDictionary *aliases;
 @property NSMutableDictionary *snapshots;
+@property NSMutableArray *leapBindings;
 
 + (SlateConfig *)getInstance;
 + (NSAlert *)warningAlertWithKeyEquivalents:(NSArray *)titles;
