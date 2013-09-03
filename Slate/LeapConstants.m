@@ -23,4 +23,13 @@
 
 NSString *const LEAP_GESTURE_TAP = @"tap";
 NSString *const LEAP_GESTURE_CIRCLE = @"circle";
+NSString *const LEAP_GESTURE_SWIPE = @"swipe";
 NSString *const LEAP = @"leap";
+NSString *const LEAP_GESTURE_DIRECTION_TOP_LEFT = @"topLeft";
+NSString *const LEAP_GESTURE_DIRECTION_TOP = @"top";
+NSString *const LEAP_GESTURE_DIRECTION_TOP_RIGHT = @"topRight";
+NSString *const LEAP_GESTURE_DIRECTION_RIGHT = @"right";
+NSString *const LEAP_GESTURE_DIRECTION_BOTTOM_RIGHT = @"bottomRight";
+NSString *const LEAP_GESTURE_DIRECTION_BOTTOM = @"bottom";
+NSString *const LEAP_GESTURE_DIRECTION_BOTTOM_LEFT = @"bottomLeft";
+NSString *const LEAP_GESTURE_DIRECTION_LEFT = @"left";
