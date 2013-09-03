@@ -22,6 +22,8 @@
 #import "Performance.h"
 #import "LeapObjectiveC.h"
 #import "SlateLogger.h"
+#import "LeapVector+Tag.h"
+#import "LeapConstants.h"
 
 
 @implementation Performance {
@@ -29,30 +31,55 @@
 }
 
 @synthesize gesture;
-@synthesize capturedFrames;
+@synthesize direction = _direction;
+//@synthesize capturedFrames;
+//@synthesize averageDirection;
+//@synthesize id = _id;
 
-@synthesize averageDirection;
+static LeapVector *VECTOR_BOTTOM_LEFT;
+static LeapVector *VECTOR_BOTTOM;
+static LeapVector *VECTOR_BOTTOM_RIGHT;
+static LeapVector *VECTOR_RIGHT;
+static LeapVector *VECTOR_TOP_RIGHT;
+static LeapVector *VECTOR_TOP;
+static LeapVector *VECTOR_TOP_LEFT;
+static LeapVector *VECTOR_LEFT;
+static NSArray *GESTURE_DIRECTIONS;
 
-@synthesize id = _id;
++ (void)initialize {
+    VECTOR_BOTTOM_LEFT  = [LeapVector vectorWithTag:LEAP_GESTURE_DIRECTION_BOTTOM_LEFT  x:-1 y:-1 z:0];
+    VECTOR_BOTTOM       = [LeapVector vectorWithTag:LEAP_GESTURE_DIRECTION_BOTTOM       x:+0 y:-1 z:0];
+    VECTOR_BOTTOM_RIGHT = [LeapVector vectorWithTag:LEAP_GESTURE_DIRECTION_BOTTOM_RIGHT x:+1 y:-1 z:0];
+    VECTOR_RIGHT        = [LeapVector vectorWithTag:LEAP_GESTURE_DIRECTION_RIGHT        x:+1 y:+0 z:0];
+    VECTOR_TOP_RIGHT    = [LeapVector vectorWithTag:LEAP_GESTURE_DIRECTION_TOP_RIGHT    x:+1 y:+1 z:0];
+    VECTOR_TOP          = [LeapVector vectorWithTag:LEAP_GESTURE_DIRECTION_TOP          x:+0 y:+1 z:0];
+    VECTOR_TOP_LEFT     = [LeapVector vectorWithTag:LEAP_GESTURE_DIRECTION_TOP_LEFT     x:-1 y:+1 z:0];
+    VECTOR_LEFT         = [LeapVector vectorWithTag:LEAP_GESTURE_DIRECTION_LEFT         x:-1 y:+0 z:0];
+    
+    GESTURE_DIRECTIONS  = [NSArray arrayWithObjects:VECTOR_TOP_LEFT,    VECTOR_TOP,    VECTOR_TOP_RIGHT, 
+                                                    VECTOR_LEFT,                       VECTOR_RIGHT,
+                                                    VECTOR_BOTTOM_LEFT, VECTOR_BOTTOM, VECTOR_BOTTOM_RIGHT, 
+                                                    nil];
+}
 
 - (id)initWithSwipeGesture:(LeapSwipeGesture *)g {
     self = [super init];
     if (self) {
         _id = g.id;
-        self.averageDirection = g.direction;
+        averageDirection = g.direction;
         directionHistory = [[NSMutableArray alloc] initWithCapacity:50];
         [self update:g];
 
-        SlateLogger(@"Performance(swipe, %d)", g.id);
+        SlateLogger(@"Performance(%d, swipe)", g.id);
     }
     return self;
 }
 
 - (void)update:(LeapSwipeGesture *)g {
-    if (g.id != self.id) SlateLogger(@"Invalid update object %d != %d", g.id, self.id);
+    if (g.id != _id) SlateLogger(@"Invalid update object %d != %d", g.id, _id);
 
     self.gesture = g;
-    self.capturedFrames++;
+    capturedFrames++;
 
     [directionHistory addObject:g.direction];
 
@@ -62,12 +89,39 @@
             sum = [sum plus:[directionHistory objectAtIndex:i]];
         }
 
-        self.averageDirection = [sum divide:[directionHistory count]];
+        averageDirection = [sum divide:[directionHistory count]];
         [directionHistory removeAllObjects];
-
-        SlateLogger(@"  Performed(swipe, %d): averageDirection=%@", self.id, self.averageDirection);
+        _direction = [Performance directionOf:averageDirection];
+        
+        SlateLogger(@"  Performed(%d, swipe, %@):", _id, _direction);
     }
 }
 
++ (id)create:(LeapGestureType)type direction:(NSString *)direction {
+    Performance *result = [[Performance alloc] init];
+    result.direction = direction;
+    return result;
+}
+
+
++ (NSString *)directionOf:(LeapVector *)dirVector {
+    NSMutableArray *angles = [NSMutableArray arrayWithCapacity:[GESTURE_DIRECTIONS count]];
+
+    for (LeapVector *vector in GESTURE_DIRECTIONS) {
+        NSArray *pair = @[vector.tag, [NSNumber numberWithFloat:[vector angleTo:dirVector]]];
+        [angles addObject:pair];
+    }
+
+    [angles sortUsingComparator:^(NSArray *obj1, NSArray *obj2) {
+        return [[obj1 objectAtIndex:1] compare:[obj2 objectAtIndex:1]];
+    }];
+
+    NSArray *best = [angles objectAtIndex:0];
+    NSString *direction = [best objectAtIndex:0];
+//    NSNumber *angle = [best objectAtIndex:1];
+//    SlateLogger(@"direction=%@ angle=%f", direction, angle.floatValue * 180 / pi);
+
+    return direction;
+}
 
 @end
