@@ -1,8 +1,8 @@
 //
-//  LeapHandler.h
+//  PerformanceListener.h
 //  Slate
 //
-//  Created by Ömer Yildiz  on 8/28/13.
+//  Created by Ömer Yildiz  on 09/03/13.
 //  Copyright 2013 Ömer Yildiz. All rights reserved.
 //
 //  This program is free software: you can redistribute it and/or modify
@@ -18,13 +18,12 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see http://www.gnu.org/licenses
 
+
 #import <Foundation/Foundation.h>
-#import "LeapObjectiveC.h"
-#import "PerformanceListener.h"
 
-@interface LeapHandler : NSObject<LeapDelegate, PerformanceListener>
+@protocol PerformanceListener <NSObject>
 
-- (void)setup;
-- (void)addListener:(id<PerformanceListener>)listener;
+@optional 
+- (void)onPerformance:(NSNotification *)notification;
 
 @end

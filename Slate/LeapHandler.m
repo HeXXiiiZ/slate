@@ -22,6 +22,7 @@
 #import "SlateLogger.h"
 #import "AccessibilityWrapper.h"
 #import "Performance.h"
+#import "PerformanceListener.h"
 
 
 @implementation LeapHandler {
@@ -41,6 +42,19 @@
 
 - (void)setup {
     controller = [[LeapController alloc] initWithDelegate:self];
+
+    [self addListener:self];
+}
+
+- (void)addListener:(id <PerformanceListener>)listener {
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    if ([listener respondsToSelector:@selector(onPerformance:)]) {
+        [nc addObserver:listener selector:@selector(onPerformance:) name:@"OnPerformance" object:self];
+    }
+}
+
+- (void)onPerformance:(NSNotification *)notification {
+    SlateLogger(@"onPerformance");
 }
 
 - (void)onInit:(LeapController *)lc {
@@ -102,6 +116,13 @@
                         Performance *performance = [currentPerformances objectForKey:id];
                         if (!performance) SlateLogger(@"previous is nil");
                         [performance update:swipe];
+
+                        if (swipe.state == LEAP_GESTURE_STATE_STOP) {
+                            NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+                            NSNotification *notification = [NSNotification notificationWithName:@"OnPerformance" object:self userInfo:[NSDictionary dictionaryWithObject:performance forKey:@"performance"]];
+                            [nc performSelectorOnMainThread:@selector(postNotification:) withObject:notification waitUntilDone:NO];
+                        }
+
                         break;
                     }
 
