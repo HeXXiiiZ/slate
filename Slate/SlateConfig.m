@@ -378,7 +378,7 @@ static SlateConfig *_instance = nil;
     } else if ([tokens count] >= 3 && [[tokens objectAtIndex:0] isEqualToString:LEAP]) {
         // leap <gesture> <op> <parameters>
         @try {
-            SlateLogger(@"  LoadingL: %@",line);
+            SlateLogger(@"  LoadingLP: %@",line);
             LeapBinding *bind = [[LeapBinding alloc] initWithString:line];
             [self addLeapBinding:bind];
         } @catch (NSException *ex) {

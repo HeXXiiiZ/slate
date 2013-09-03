@@ -66,6 +66,7 @@
 
     [lc enableGesture:LEAP_GESTURE_TYPE_SCREEN_TAP enable:YES];
     [lc enableGesture:LEAP_GESTURE_TYPE_SWIPE enable:YES];
+    [lc setPolicyFlags:LEAP_POLICY_BACKGROUND_FRAMES];
 }
 
 - (void)onDisconnect:(LeapController *)lc {
@@ -96,7 +97,7 @@
             }
 
             case LEAP_GESTURE_TYPE_SWIPE: {
-                LeapSwipeGesture *swipe = (LeapSwipeGesture *)gesture;
+                LeapSwipeGesture *swipe = (LeapSwipeGesture *) gesture;
 //                SlateLogger(@"Swipe id: %d, %@, position: %@, direction: %@, speed: %f",
 //                        swipe.id, [LeapHandler stringForState:swipe.state],
 //                        swipe.position, swipe.direction, swipe.speed);
@@ -142,8 +143,7 @@
     }
 }
 
-+ (NSString *)stringForState:(LeapGestureState)state
-{
++ (NSString *)stringForState:(LeapGestureState)state {
     switch (state) {
         case LEAP_GESTURE_STATE_INVALID:
             return @"STATE_INVALID";
