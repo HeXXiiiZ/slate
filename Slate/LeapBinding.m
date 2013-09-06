@@ -21,6 +21,13 @@
 #import "LeapBinding.h"
 #import "StringTokenizer.h"
 #import "LeapObjectiveC.h"
+#import "SlateLogger.h"
+#import "Performance.h"
+#import "Operation.h"
+#import "SwitchOperation.h"
+#import "Constants.h"
+#import "Performance.h"
+#import "LeapConstants.h"
 
 
 @implementation LeapBinding {
@@ -40,7 +47,7 @@
         }
 
         [self setGestureFromString:[tokens objectAtIndex:1]];
-//        [self setOperationAndRepeatFromString:[tokens objectAtIndex:2]];
+        [self setOperationFromString:[tokens objectAtIndex:2]];
     }
 
     return self;
@@ -50,12 +57,33 @@
     return NO;
 }
 
-- (void)setGestureFromString:(NSString*)gesture {
-
+- (void)setGestureFromString:(NSString *)gesture {
+    performance = [Performance create:LEAP_GESTURE_TYPE_SWIPE direction:LEAP_GESTURE_DIRECTION_LEFT];
+    
+    // TODO parse _gesture string
+    // TODO implement equals method for performance
 }
 
-+ (LeapGesture *)getGestureFromString:(NSString *)gesture {
-    return nil;
+
+- (void)setOperationFromString:(NSString *)token {
+    NSMutableString *opStr = [[NSMutableString alloc] initWithCapacity:10];
+    [StringTokenizer firstToken:token into:opStr];
+
+    // TODO avoid code duplication: copied from Binding.m
+    Operation *theOp = [Operation operationFromString:token];
+    if (theOp == nil) {
+        SlateLogger(@"ERROR: Unable to create binding");
+        @throw([NSException exceptionWithName:@"Unable To Create Binding" reason:[NSString stringWithFormat:@"Unable to create '%@'", token] userInfo:nil]);
+    }
+
+    @try {
+        [theOp testOperation];
+    } @catch (NSException *ex) {
+        SlateLogger(@"ERROR: Unable to test binding '%@'", token);
+        @throw([NSException exceptionWithName:@"Unable To Parse Binding" reason:[NSString stringWithFormat:@"Unable to parse '%@' in '%@'", [ex reason], token] userInfo:nil]);
+    }
+
+    op = theOp;
 }
 
 @end

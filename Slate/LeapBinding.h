@@ -21,9 +21,11 @@
 #import <Foundation/Foundation.h>
 
 @class Operation;
+@class Performance;
 
 @interface LeapBinding : NSObject {
 @private
+    Performance *performance;
     Operation *op;
     BOOL repeat;
 }
@@ -33,7 +35,7 @@
 
 - (id)initWithString:(NSString *)binding;
 - (BOOL)doOperation;
-
-+ (NSString *)getGestureFromString:(NSString *)gesture;
+- (void)setGestureFromString:(NSString *)gesture;
+- (void)setOperationFromString:(NSString *)token;
 
 @end
