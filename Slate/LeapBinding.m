@@ -58,7 +58,7 @@
 }
 
 - (void)setGestureFromString:(NSString *)gesture {
-    performance = [Performance create:LEAP_GESTURE_TYPE_SWIPE direction:LEAP_GESTURE_DIRECTION_LEFT];
+    performance = [[Performance alloc] initWithGestureType:LEAP_GESTURE_TYPE_SWIPE direction:LEAP_GESTURE_DIRECTION_TOP_LEFT];
     
     // TODO parse _gesture string
     // TODO implement equals method for performance

@@ -28,21 +28,22 @@
 
 @interface Performance : NSObject {
     int _id;
+    LeapGestureType _type;
     LeapGesture *_gesture;
     int _capturedFrames;
     LeapVector *_averageDirection;
     NSString *_direction;
 }
 
-@property(nonatomic, strong) LeapGesture *gesture;
-@property(nonatomic, copy) NSString *direction;
+@property(nonatomic, readonly) LeapGesture *gesture;
+@property(nonatomic, readonly) NSString *direction;
 @property(nonatomic, readonly) int id;
+@property(nonatomic, readonly) LeapGestureType type;
 
 + (NSString *)directionOf:(LeapVector *)dirVector;
 
 - (id)initWithSwipeGesture:(LeapSwipeGesture *)g;
+- (id)initWithGestureType:(LeapGestureType)type direction:(NSString *)direction;
 - (void)update:(LeapSwipeGesture *)g;
-
-+ (id)create:(LeapGestureType)type direction:(NSString *)direction;
 
 @end

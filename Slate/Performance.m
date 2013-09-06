@@ -73,6 +73,18 @@ static NSArray *GESTURE_DIRECTIONS;
     return self;
 }
 
+- (id)initWithGestureType:(LeapGestureType)type direction:(NSString *)direction {
+    self = [super init];
+    if (self) {
+        _id = -1;
+        _averageDirection = nil;
+        _type = type;
+        _direction = direction;
+    }
+    return self;
+}
+
+
 - (void)update:(LeapSwipeGesture *)g {
     if (g.id != _id) SlateLogger(@"Invalid update object %d != %d", g.id, _id);
 
@@ -95,13 +107,6 @@ static NSArray *GESTURE_DIRECTIONS;
     }
 }
 
-+ (id)create:(LeapGestureType)type direction:(NSString *)direction {
-    Performance *result = [[Performance alloc] init];
-    result.direction = direction;
-    return result;
-}
-
-
 + (NSString *)directionOf:(LeapVector *)dirVector {
     NSMutableArray *angles = [NSMutableArray arrayWithCapacity:[GESTURE_DIRECTIONS count]];
 
@@ -121,5 +126,29 @@ static NSArray *GESTURE_DIRECTIONS;
 
     return direction;
 }
+
+- (BOOL)isEqual:(id)other {
+    if (other == self)
+        return YES;
+    if (!other || ![[other class] isEqual:[self class]])
+        return NO;
+
+    Performance *o = (Performance *) other;
+    if (_id == o.id) 
+        return YES;
+    
+    if (_type != o.type)
+        return NO;
+    
+    if ([_direction isEqual:o.direction])
+        return YES;
+    
+    return NO;
+}
+
+- (NSUInteger)hash {
+    return [super hash];
+}
+
 
 @end
