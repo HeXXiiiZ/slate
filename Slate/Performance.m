@@ -30,11 +30,9 @@
     NSMutableArray *directionHistory;
 }
 
-@synthesize gesture;
+@synthesize gesture = _gesture;
 @synthesize direction = _direction;
-//@synthesize capturedFrames;
-//@synthesize averageDirection;
-//@synthesize id = _id;
+@synthesize id = _id;
 
 static LeapVector *VECTOR_BOTTOM_LEFT;
 static LeapVector *VECTOR_BOTTOM;
@@ -66,7 +64,7 @@ static NSArray *GESTURE_DIRECTIONS;
     self = [super init];
     if (self) {
         _id = g.id;
-        averageDirection = g.direction;
+        _averageDirection = g.direction;
         directionHistory = [[NSMutableArray alloc] initWithCapacity:50];
         [self update:g];
 
@@ -78,8 +76,8 @@ static NSArray *GESTURE_DIRECTIONS;
 - (void)update:(LeapSwipeGesture *)g {
     if (g.id != _id) SlateLogger(@"Invalid update object %d != %d", g.id, _id);
 
-    self.gesture = g;
-    capturedFrames++;
+    _gesture = g;
+    _capturedFrames++;
 
     [directionHistory addObject:g.direction];
 
@@ -89,9 +87,9 @@ static NSArray *GESTURE_DIRECTIONS;
             sum = [sum plus:[directionHistory objectAtIndex:i]];
         }
 
-        averageDirection = [sum divide:[directionHistory count]];
+        _averageDirection = [sum divide:[directionHistory count]];
         [directionHistory removeAllObjects];
-        _direction = [Performance directionOf:averageDirection];
+        _direction = [Performance directionOf:_averageDirection];
         
         SlateLogger(@"  Performed(%d, swipe, %@):", _id, _direction);
     }

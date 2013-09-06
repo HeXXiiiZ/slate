@@ -28,19 +28,15 @@
 
 @interface Performance : NSObject {
     int _id;
-    LeapGesture *gesture;
-    int capturedFrames;
-    LeapVector *averageDirection;
+    LeapGesture *_gesture;
+    int _capturedFrames;
+    LeapVector *_averageDirection;
     NSString *_direction;
 }
 
 @property(nonatomic, strong) LeapGesture *gesture;
 @property(nonatomic, copy) NSString *direction;
-
-//@property(nonatomic) int capturedFrames;
-//@property(nonatomic, strong) LeapVector *averageDirection;
-//@property(nonatomic, readonly) int id;
-
+@property(nonatomic, readonly) int id;
 
 + (NSString *)directionOf:(LeapVector *)dirVector;
 
