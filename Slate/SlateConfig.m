@@ -52,6 +52,7 @@
 @synthesize snapshots;
 @synthesize appConfigs;
 
+@synthesize leapBindings;
 static SlateConfig *_instance = nil;
 
 + (SlateConfig *)getInstance {

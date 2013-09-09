@@ -30,8 +30,8 @@
 @implementation SlateConfig (Leap)
 
 - (void)addLeapBinding:(LeapBinding *)bind {
-    if (!self.leapBindings) {
-        [[NSMutableArray alloc] initWithCapacity:10];
+    if (self.leapBindings == nil) {
+        self.leapBindings = [[NSMutableArray alloc] initWithCapacity:10];
     }
 
     [self.leapBindings addObject:bind];
