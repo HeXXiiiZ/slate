@@ -157,7 +157,31 @@ static NSArray *GESTURE_DIRECTIONS;
     
     return result;
 }
+
++ (NSString *)getNameOfGestureType:(LeapGestureType)type {
+    switch (type) {
+        case LEAP_GESTURE_TYPE_SWIPE:
+            return @"swipe";
+        case LEAP_GESTURE_TYPE_CIRCLE:
+            return @"circle";
+        case LEAP_GESTURE_TYPE_KEY_TAP:
+            return @"keyTap";
+        case LEAP_GESTURE_TYPE_SCREEN_TAP:
+            return @"screenTap";
+        case LEAP_GESTURE_TYPE_INVALID:
+            return @"invalid";
+    }
 }
+
+- (NSString *)description {
+    NSMutableString *description = [NSMutableString stringWithFormat:@"<%@: ", NSStringFromClass([self class])];
+    [description appendString:[Performance getNameOfGestureType:_type]];
+    [description appendString:@" "];
+    [description appendString:_direction];
+    [description appendString:@">"];
+    return description;
+}
+
 
 
 @end
