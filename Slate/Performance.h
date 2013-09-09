@@ -26,7 +26,7 @@
 @class LeapVector;
 @class LeapSwipeGesture;
 
-@interface Performance : NSObject {
+@interface Performance : NSObject <NSCopying> {
     int _id;
     LeapGestureType _type;
     LeapGesture *_gesture;

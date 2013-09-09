@@ -158,6 +158,10 @@ static NSArray *GESTURE_DIRECTIONS;
     return result;
 }
 
+- (id)copyWithZone:(NSZone *)zone {
+    return self;
+}
+
 + (NSString *)getNameOfGestureType:(LeapGestureType)type {
     switch (type) {
         case LEAP_GESTURE_TYPE_SWIPE:
