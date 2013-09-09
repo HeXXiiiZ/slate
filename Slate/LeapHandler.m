@@ -23,12 +23,15 @@
 #import "AccessibilityWrapper.h"
 #import "Performance.h"
 #import "PerformanceListener.h"
+#import "SlateConfig.h"
+#import "LeapBinding.h"
 
 
 @implementation LeapHandler {
     LeapController *controller;
     NSMutableArray *history;
     NSMutableDictionary *currentPerformances;
+    NSMutableDictionary *_bindings;
 }
 
 - (id)init {
@@ -43,6 +46,14 @@
 - (void)setup {
     controller = [[LeapController alloc] initWithDelegate:self];
 
+    SlateLogger(@"Registering Leap Bindings...");
+    NSMutableArray *bindings = [[SlateConfig getInstance] leapBindings];
+    _bindings = [NSMutableDictionary dictionaryWithCapacity:bindings.count];
+    for (LeapBinding *binding in bindings) {
+        SlateLogger(@"REGISTERING %@", binding.performance);
+        [_bindings setObject:binding forKey:binding.performance];
+    }
+
     [self addListener:self];
 }
 
@@ -54,7 +65,14 @@
 }
 
 - (void)onPerformance:(NSNotification *)notification {
-    SlateLogger(@"onPerformance");
+
+    Performance *p = [notification.userInfo objectForKey:@"performance"];
+    LeapBinding *binding = [_bindings objectForKey:p];
+    if (binding != nil) {
+        SlateLogger(@"onPerformance (%d, %@)", p.type, p.direction);
+    } else {
+        SlateLogger(@"Unhandled performance");
+    }
 }
 
 - (void)onInit:(LeapController *)lc {
@@ -98,9 +116,6 @@
 
             case LEAP_GESTURE_TYPE_SWIPE: {
                 LeapSwipeGesture *swipe = (LeapSwipeGesture *) gesture;
-//                SlateLogger(@"Swipe id: %d, %@, position: %@, direction: %@, speed: %f",
-//                        swipe.id, [LeapHandler stringForState:swipe.state],
-//                        swipe.position, swipe.direction, swipe.speed);
 
                 switch (swipe.state) {
                     case LEAP_GESTURE_STATE_START: {
