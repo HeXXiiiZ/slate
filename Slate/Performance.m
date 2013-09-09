@@ -147,7 +147,16 @@ static NSArray *GESTURE_DIRECTIONS;
 }
 
 - (NSUInteger)hash {
-    return [super hash];
+    NSUInteger result = 1;
+    NSUInteger prime = 31;
+//    NSUInteger yesPrime = 1231;
+//    NSUInteger noPrime = 1237;
+
+    result = prime * result + [self.direction hash];
+    result = prime * result + self.type;
+    
+    return result;
+}
 }
 
 
