@@ -30,7 +30,6 @@
     NSMutableArray *directionHistory;
 }
 
-@synthesize gesture = _gesture;
 @synthesize direction = _direction;
 @synthesize id = _id;
 
@@ -67,8 +66,6 @@ static NSArray *GESTURE_DIRECTIONS;
         _averageDirection = g.direction;
         directionHistory = [[NSMutableArray alloc] initWithCapacity:50];
         [self update:g];
-
-        SlateLogger(@"Performance(%d, swipe)", g.id);
     }
     return self;
 }
@@ -84,11 +81,9 @@ static NSArray *GESTURE_DIRECTIONS;
     return self;
 }
 
-
 - (void)update:(LeapSwipeGesture *)g {
     if (g.id != _id) SlateLogger(@"Invalid update object %d != %d", g.id, _id);
 
-    _gesture = g;
     _capturedFrames++;
 
     [directionHistory addObject:g.direction];
@@ -102,8 +97,7 @@ static NSArray *GESTURE_DIRECTIONS;
         _averageDirection = [sum divide:[directionHistory count]];
         [directionHistory removeAllObjects];
         _direction = [Performance directionOf:_averageDirection];
-        
-        SlateLogger(@"  Performed(%d, swipe, %@):", _id, _direction);
+        _type = g.type;
     }
 }
 
@@ -134,7 +128,7 @@ static NSArray *GESTURE_DIRECTIONS;
         return NO;
 
     Performance *o = (Performance *) other;
-    if (_id == o.id) 
+    if ((_id != -1) && (_id == o.id)) 
         return YES;
     
     if (_type != o.type)
@@ -182,6 +176,8 @@ static NSArray *GESTURE_DIRECTIONS;
     [description appendString:[Performance getNameOfGestureType:_type]];
     [description appendString:@" "];
     [description appendString:_direction];
+    [description appendString:@" "];
+    [description appendFormat:@"%u", (unsigned int) [self hash]];
     [description appendString:@">"];
     return description;
 }

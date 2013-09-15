@@ -65,13 +65,13 @@
 }
 
 - (void)onPerformance:(NSNotification *)notification {
-
     Performance *p = [notification.userInfo objectForKey:@"performance"];
     LeapBinding *binding = [_bindings objectForKey:p];
     if (binding != nil) {
-        SlateLogger(@"onPerformance (%d, %@)", p.type, p.direction);
+        SlateLogger(@"onPerformance: %@", p);
+        [binding doOperation];
     } else {
-        SlateLogger(@"Unhandled performance");
+        SlateLogger(@"Unhandled performance: %@", p);
     }
 }
 
@@ -121,7 +121,7 @@
                     case LEAP_GESTURE_STATE_START: {
                         Performance *performance = [[Performance alloc] initWithSwipeGesture:swipe];
 
-                        [history addObject:performance];
+//                        [history addObject:performance];
                         [currentPerformances setObject:performance forKey:id];
 
                         break;

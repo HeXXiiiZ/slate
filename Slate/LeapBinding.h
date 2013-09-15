@@ -30,12 +30,14 @@
     BOOL repeat;
 }
 
+@property(nonatomic, strong) Performance *performance;
 @property(nonatomic, strong) Operation *op;
 @property(assign) BOOL repeat;
 
+
 - (id)initWithString:(NSString *)binding;
 - (BOOL)doOperation;
-- (void)setGestureFromString:(NSString *)gesture;
+- (void)setGestureFromString:(NSString *)gStr;
 - (void)setOperationFromString:(NSString *)token;
 
 @end

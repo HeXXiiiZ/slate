@@ -28,6 +28,7 @@
 #import "Constants.h"
 #import "Performance.h"
 #import "LeapConstants.h"
+#import "SlateConfig.h"
 
 
 @implementation LeapBinding {
@@ -35,6 +36,7 @@
 }
 @synthesize op;
 @synthesize repeat;
+@synthesize performance;
 
 - (id)initWithString:(NSString *)binding {
     self = [self init];
@@ -54,16 +56,56 @@
 }
 
 - (BOOL)doOperation {
+    // TODO avoid code duplication
+    @try {
+        return [op doOperation];
+    } @catch (NSException *ex) {
+        SlateLogger(@"   ERROR %@",[ex name]);
+        NSAlert *alert = [SlateConfig warningAlertWithKeyEquivalents: [NSArray arrayWithObjects:@"Quit", @"Skip", nil]];
+        [alert setMessageText:[ex name]];
+        [alert setInformativeText:[ex reason]];
+        if ([alert runModal] == NSAlertFirstButtonReturn) {
+            SlateLogger(@"User selected exit");
+            [NSApp terminate:nil];
+        }
+    }
+
     return NO;
 }
 
-- (void)setGestureFromString:(NSString *)gesture {
-    performance = [[Performance alloc] initWithGestureType:LEAP_GESTURE_TYPE_SWIPE direction:LEAP_GESTURE_DIRECTION_TOP_LEFT];
+- (void)setGestureFromString:(NSString *)gStr {
+    NSArray *comps = [gStr componentsSeparatedByString:COLON];
     
-    // TODO parse _gesture string
-    // TODO implement equals method for performance
+    if (comps.count != 2) {
+        NSString *reason = [NSString stringWithFormat:@"Unrecognized gesture \"%@\"", gStr];
+        SlateLogger(@"ERROR: %@", reason);
+        @throw([NSException exceptionWithName:@"Unrecognized gesture" reason:reason userInfo:nil]);
+    } 
+    
+    NSString *gesture = [comps objectAtIndex:0];
+    NSString *modifiers = [comps objectAtIndex:1];
+    NSArray *modifiersArray = [modifiers componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@",;"]];
+    LeapGestureType gestureType = [self getGestureTypeFromString:gesture];
+    
+//    performance = [[Performance alloc] initWithGestureType:gestureType modifiers:modifiersArray];
+    performance = [[Performance alloc] initWithGestureType:gestureType direction:[modifiersArray objectAtIndex:0]]; 
 }
 
+- (LeapGestureType)getGestureTypeFromString:(NSString *)type {
+    if ([@"swipe" isEqualToString:type]) {
+        return LEAP_GESTURE_TYPE_SWIPE;
+    } else if ([@"screenTap" isEqualToString:type]) {
+        return LEAP_GESTURE_TYPE_SCREEN_TAP;
+    } else if ([@"keyTap" isEqualToString:type]) {
+        return LEAP_GESTURE_TYPE_KEY_TAP;
+    } else if ([@"circle" isEqualToString:type]) {
+        return LEAP_GESTURE_TYPE_CIRCLE;
+    }
+
+    NSString *reason = [NSString stringWithFormat:@"Unrecognized leap gesture type '%@'", type];
+    SlateLogger(@"ERROR: %@", reason);
+    @throw([NSException exceptionWithName:@"Unrecognized gesture type" reason:reason userInfo:nil]);
+}
 
 - (void)setOperationFromString:(NSString *)token {
     NSMutableString *opStr = [[NSMutableString alloc] initWithCapacity:10];
